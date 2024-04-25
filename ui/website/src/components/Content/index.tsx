@@ -218,6 +218,7 @@ const Content = (props: any) => {
       {showGithub && <GithubLink />}
       <DarkSwitch showGithub={showGithub} />
     </>
+
   );
 };
 

@@ -4,20 +4,16 @@ import { getLogoUrl } from "../../utils/check";
 import { getJumpTarget } from "../../utils/setting";
 const Card = ({ title, url, des, logo, catelog, onClick, index, isSearching }) => {
   const el = useMemo(() => {
-    if (url === "admin") {
-      return <img src={logo} alt={title} />
+    if (logo.split(".").pop().includes("svg")) {
+      return <embed src={getLogoUrl(logo)} type="image/svg+xml" />
     } else {
-      if (logo.split(".").pop().includes("svg")) {
-        return <embed src={getLogoUrl(logo)} type="image/svg+xml" />
-      } else {
-        return <img src={getLogoUrl(logo)} alt={title} />
-      }
+      return <img src={getLogoUrl(logo)} alt={title} />
     }
   }, [logo, title, url])
   const showNumIndex = index < 10 && isSearching;
   return (
     <a
-      href={url === "toggleJumpTarget" ? undefined : url}
+      href={url}
       onClick={() => {
         onClick();
       }}
@@ -29,11 +25,6 @@ const Card = ({ title, url, des, logo, catelog, onClick, index, isSearching }) =
       <div className="card-content">
         <div className="card-left">
           {el}
-          {/* {url === "admin" ? (
-            <img src={logo} alt={title} />
-          ) : (
-            <img src={`/api/img?url=${logo}`} alt={title} />
-          )} */}
         </div>
         <div className="card-right">
           <div className="card-right-top">
